@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Dépenses</title>
+    <!-- Lien vers Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Gestion des Dépenses pour Aménagement</h1>
+
+        <!-- Formulaire pour ajouter un achat -->
+        <div class="card mb-4">
+            <div class="card-header">Ajouter un nouvel achat</div>
+            <div class="card-body">
+                <form id="addPurchaseForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="date">Date</label>
+                            <input type="date" class="form-control" id="date" name="date" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" id="description" name="description" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="prix">Prix (€)</label>
+                            <input type="number" class="form-control" id="prix" name="prix" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="magasin">Magasin</label>
+                            <input type="text" class="form-control" id="magasin" name="magasin" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="acheteur">Acheteur</label>
+                            <select class="form-control" id="acheteur" name="acheteur" required>
+                                <option value="Alizée">Alizée</option>
+                                <option value="Adrien">Adrien</option>
+                                <option value="Compte Commun">Compte Commun</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ajouter Achat</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tableau pour afficher l'historique des achats -->
+        <div class="card">
+            <div class="card-header">Historique des Achats</div>
+            <div class="card-body">
+                <input type="text" id="searchInput" class="form-control mb-3" placeholder="Rechercher...">
+                <table class="table table-bordered" id="purchasesTable">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)">Date</th>
+                            <th onclick="sortTable(1)">Description</th>
+                            <th onclick="sortTable(2)">Prix (€)</th>
+                            <th onclick="sortTable(3)">Magasin</th>
+                            <th onclick="sortTable(4)">Acheteur</th>
+                        </tr>
+                    </thead>
+                    <tbody id="purchasesBody">
+                        <!-- Contenu généré par fetch_purchases.php -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lien vers Bootstrap JS et jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
