@@ -21,7 +21,8 @@ $(document).ready(function () {
             data: formData,
             success: function () {
                 $('#addPurchaseForm')[0].reset(); // Réinitialiser le formulaire après l'ajout
-                $('#newMagasin').hide(); // Masquer le champ "nouveau magasin"
+                $('#newMagasinContainer').hide(); // Masquer le champ "nouveau magasin"
+                $('#magasin').show(); // Réafficher la combo box
                 loadPurchases(); // Recharger les données pour mettre à jour les tableaux
                 loadMagasins();  // Recharger la liste des magasins
             }
@@ -41,13 +42,37 @@ $(document).ready(function () {
         window.location.href = 'export_excel.php'; // Redirection vers l'exportation Excel
     });
 
-    // Gérer le champ de sélection du magasin
+    // Gérer l'affichage du champ de nouveau magasin
     $('#magasin').on('change', function () {
         if ($(this).val() === 'new') {
-            $('#newMagasin').show();
+            $('#magasin').hide();
+            $('#newMagasinContainer').show();
         } else {
-            $('#newMagasin').hide();
+            $('#newMagasinContainer').hide();
         }
+    });
+
+    // Valider le nouveau magasin
+    $('#confirmNewMagasin').on('click', function () {
+        var newMagasin = $('#newMagasin').val();
+        if (newMagasin.trim() !== '') {
+            $.ajax({
+                url: 'add_purchase.php',
+                type: 'POST',
+                data: { action: 'addMagasin', name: newMagasin },
+                success: function (response) {
+                    loadMagasins(); // Recharger la liste des magasins après ajout
+                    $('#newMagasinContainer').hide();
+                    $('#magasin').show();
+                }
+            });
+        }
+    });
+
+    // Annuler l'ajout de nouveau magasin
+    $('#cancelNewMagasin').on('click', function () {
+        $('#newMagasinContainer').hide();
+        $('#magasin').show();
     });
 });
 
@@ -118,5 +143,19 @@ function sortTable(n) {
                 switching = true;
             }
         }
+    }
+}
+
+// Fonction pour supprimer un achat avec confirmation
+function deletePurchase(id) {
+    if (confirm("Êtes-vous sûr de vouloir supprimer cet achat ?")) {
+        $.ajax({
+            url: 'delete_purchase.php',
+            type: 'POST',
+            data: { id: id },
+            success: function () {
+                loadPurchases(); // Recharger les achats après suppression
+            }
+        });
     }
 }
