@@ -1,9 +1,9 @@
 <?php
 // database.php
-$host = 'localhost';
-$dbname = 'nom_de_votre_base';
-$username = 'votre_utilisateur';
-$password = 'votre_mot_de_passe';
+$host = 'localhost:3306';
+$dbname = 'BO_portfolio';
+$username = 'BO_portfolio_root_ap';
+$password = 'Q90mgoxv1^vVGpm&';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);

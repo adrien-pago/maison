@@ -6,7 +6,7 @@
     <title>Gestion des Dépenses</title>
     <!-- Lien vers Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
     <div class="container mt-4">
@@ -28,13 +28,16 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="prix">Prix (€)</label>
-                            <input type="number" class="form-control" id="prix" name="prix" required>
+                            <input type="number" class="form-control" id="prix" name="prix" step="0.01" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="magasin">Magasin</label>
-                            <input type="text" class="form-control" id="magasin" name="magasin" required>
+                            <select class="form-control" id="magasin" name="id_magasin" required>
+                                <!-- Les options de la liste des magasins seront chargées ici dynamiquement -->
+                            </select>
+                            <input type="text" class="form-control mt-2" id="newMagasin" placeholder="Nom du nouveau magasin" style="display:none;">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="acheteur">Acheteur</label>
@@ -43,6 +46,12 @@
                                 <option value="Adrien">Adrien</option>
                                 <option value="Compte Commun">Compte Commun</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="remarque">Remarque</label>
+                            <textarea class="form-control" id="remarque" name="remarque" rows="2"></textarea>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Ajouter Achat</button>
@@ -63,19 +72,47 @@
                             <th onclick="sortTable(2)">Prix (€)</th>
                             <th onclick="sortTable(3)">Magasin</th>
                             <th onclick="sortTable(4)">Acheteur</th>
+                            <th onclick="sortTable(5)">Remarque</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="purchasesBody">
                         <!-- Contenu généré par fetch_purchases.php -->
                     </tbody>
                 </table>
+                <!-- Bouton d'exportation en Excel -->
+                <button id="exportExcel" class="btn btn-success">Exporter en Excel</button>
+            </div>
+        </div>
+
+        <!-- Tableau pour afficher les dépenses totales -->
+        <div class="card mt-4">
+            <div class="card-header">Dépense Totale</div>
+            <div class="card-body">
+                <table class="table table-bordered" id="totalExpensesTable">
+                    <thead>
+                        <tr>
+                            <th>Total (€)</th>
+                            <th>Acheteur</th>
+                        </tr>
+                    </thead>
+                    <tbody id="totalExpensesBody">
+                        <!-- Contenu généré par fetch_purchases.php -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Total Général (€)</th>
+                            <th id="grandTotal">0.00 €</th>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
     </div>
 
-    <!-- Lien vers Bootstrap JS et jQuery -->
+    <!-- Lien vers Bootstrap JS, jQuery et JSZip -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="scripts.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
