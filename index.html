@@ -8,8 +8,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
 </head>
-<body>
-    <div class="container mt-4">
+<body class="bg-light">
+    <div class="container-fluid mt-4">
         <h1 class="text-center mb-4">Gestion des dépenses pour la maison</h1>
 
         <!-- Formulaire pour ajouter un achat -->
@@ -66,27 +66,29 @@
             </div>
         </div>
 
-        <!-- Tableau pour afficher l'historique des achats -->
+        <!-- Conteneur avec ascenseur horizontal pour le tableau -->
         <div class="card">
             <div class="card-header">Historique des achats</div>
             <div class="card-body">
                 <input type="text" id="searchInput" class="form-control mb-3" placeholder="Rechercher...">
-                <table class="table table-bordered" id="purchasesTable">
-                    <thead>
-                        <tr>
-                            <th onclick="sortTable(0)">Date</th>
-                            <th onclick="sortTable(1)">Description</th>
-                            <th onclick="sortTable(2)">Prix (€)</th>
-                            <th onclick="sortTable(3)">Magasin</th>
-                            <th onclick="sortTable(4)">Acheteur</th>
-                            <th onclick="sortTable(5)">Remarque</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="purchasesBody">
-                        <!-- Contenu généré par fetch_purchases.php -->
-                    </tbody>
-                </table>
+                <div class="table-responsive"> <!-- Ajout du conteneur responsive pour le défilement -->
+                    <table class="table table-bordered" id="purchasesTable">
+                        <thead>
+                            <tr>
+                                <th onclick="sortTable(0)">Date</th>
+                                <th onclick="sortTable(1)">Description</th>
+                                <th onclick="sortTable(2)">Prix (€)</th>
+                                <th onclick="sortTable(3)">Magasin</th>
+                                <th onclick="sortTable(4)">Acheteur</th>
+                                <th onclick="sortTable(5)">Remarque</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="purchasesBody">
+                            <!-- Contenu généré par fetch_purchases.php -->
+                        </tbody>
+                    </table>
+                </div>
                 <!-- Bouton d'exportation en Excel -->
                 <button id="exportExcel" class="btn btn-success">Exporter en Excel</button>
             </div>
@@ -108,7 +110,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Total Général (€)</th>
+                            <th>Total général (€)</th>
                             <th id="grandTotal">0.00 €</th>
                         </tr>
                     </tfoot>
